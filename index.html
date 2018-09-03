@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random items</title>
+    <style type="text/css">
+        body {
+            /* background-color: red; */
+            padding: 0.7em;;
+        }
+
+        #root {
+            min-height: 600px;;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+            /* align-content: stretch; */
+        }
+
+        #root > .main {
+            background-color: green;
+            flex-grow: 20;
+        }
+
+        #root > .footer {
+            background-color: yellow;
+            flex-grow: 1;
+            text-align: center;
+            padding-top: 0.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="main">
+            <span class='item'>a</span>
+            <span class='item'>b</span>
+            <span class='item'>c</span>
+        </div>
+
+        <div class="footer">
+            <button onclick="randomPick()">Pick</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        const items = [
+            'a',
+            'b',
+            'c'
+        ];
+
+        function renderItems() {
+            let root = document.getElementById("root");
+            for(let item in items) {
+                root.appendChild(`<span class="item"> ${item} </span>`)
+            }
+        }
+
+        function updatePick(num) {
+            $("#root .item").each( (idx, item) => {
+                let element = $(item);
+                element.removeClass("picked");
+                if (idx === num) {
+                    element.addClass("picked");
+                }
+            });
+        }
+
+        function randomPick() {
+            const now = (new Date()).getTime();
+            const choice = now % items.length;
+            updatePick(choice);
+        }
+
+        // renderItems();
+
+    </script>
+</body>
+</html>
