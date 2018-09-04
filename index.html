@@ -7,28 +7,57 @@
     <title>Random items</title>
     <style type="text/css">
         body {
-            /* background-color: red; */
-            padding: 0.7em;;
+            height: 98vh;
         }
 
         #root {
-            min-height: 600px;;
-            background-color: blue;
+            min-height: 100%;
             display: flex;
             flex-direction: column;
-            /* align-content: stretch; */
         }
 
         #root > .main {
-            background-color: green;
             flex-grow: 20;
+            padding: 1em;
+        }
+
+        .item-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item {
+            padding: 0.5em 1em 0.7em 1em;
+            margin: 0.5em;
+            border: 1px solid;
+            border-color: darkgray;
+            color: darkgray;
+            font-size: small;
+        }
+        .item.picked {
+            border: 1px solid;
+            border-color: lightgray;
+            background-color: cadetblue;
+            color: white;
+            font-size: xx-large;
+            font-family:'Courier New', Courier, monospace;
         }
 
         #root > .footer {
-            background-color: yellow;
             flex-grow: 1;
             text-align: center;
-            padding-top: 0.2em;
+            padding-top: 1em;
+        }
+
+        .button {
+            padding: 1em;
+            background-color: darkslategray;
+            border-color: white;
+            color: white;
+            font-size: large;
+            border-radius: 0.5em;
         }
     </style>
 </head>
@@ -36,13 +65,15 @@
 <body>
     <div id="root">
         <div class="main">
-            <span class='item'>a</span>
-            <span class='item'>b</span>
-            <span class='item'>c</span>
+            <div class="item-display">
+                <!-- <span class='item'>a</span>
+                <span class='item picked'>b</span>
+                <span class='item'>c</span> -->
+            </div>
         </div>
 
         <div class="footer">
-            <button onclick="randomPick()">Pick</button>
+            <button class="button" onclick="randomPick()">Pick</button>
         </div>
     </div>
 
@@ -58,9 +89,9 @@
         ];
 
         function renderItems() {
-            let root = document.getElementById("root");
-            for(let item in items) {
-                root.appendChild(`<span class="item"> ${item} </span>`)
+            let div = $("#root > .main > .item-display");
+            for(let i in items) {
+                div.append(`<span class="item"> ${items[i]} </span>`)
             }
         }
 
@@ -75,12 +106,11 @@
         }
 
         function randomPick() {
-            const now = (new Date()).getTime();
-            const choice = now % items.length;
+            const choice = Math.floor(Math.random() * items.length);
             updatePick(choice);
         }
 
-        // renderItems();
+        renderItems();
 
     </script>
 </body>
