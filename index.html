@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Random items</title>
+    <title>Random coding problem</title>
     <style type="text/css">
         body {
             height: 98vh;
@@ -28,6 +28,9 @@
             align-items: center;
         }
 
+        a.item {
+            text-decoration: none;
+        }
         .item {
             padding: 0.5em 1em 0.7em 1em;
             margin: 0.5em;
@@ -82,7 +85,7 @@
         crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        const items = [
+        const georgia_GA_problems = [
             'Hotel stop DPV 6.2',
             'YuckDonald DPV 6.3',
             'Longest Common Sub*',
@@ -90,10 +93,18 @@
             'Coin changing DPV 6.17',
         ];
 
+        const items = [
+            ['Zero to Hero', 'https://codeforces.com/contest/1175/problem/A'],
+        ];
+
         function renderItems() {
             let div = $("#root > .main > .item-display");
             for(let i in items) {
-                div.append(`<span class="item"> ${items[i]} </span>`)
+                var name, link;
+                [name, link] = items[i];
+                div.append(
+                    `<a class="item" href="${link}" target="_blank"> ${name} </a>`
+                )
             }
         }
 
