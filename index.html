@@ -76,7 +76,7 @@
         </div>
 
         <div class="footer">
-            <button class="button" onclick="randomPick()">Pick</button>
+            <button class="button" onclick="randomPickWeighted()">Pick</button>
         </div>
     </div>
 
@@ -94,16 +94,20 @@
         ];
 
         const items = [
-            ['Zero to Hero',        'https://codeforces.com/contest/1175/problem/A'],
-            ['Catch Overflow',      'https://codeforces.com/contest/1175/problem/B'],
-            ['Electrification',     'https://codeforces.com/contest/1175/problem/C'],
-            ['Stickers and Toys',   'https://codeforces.com/contest/1187/problem/A'],
-            ['Letters Shop',        'https://codeforces.com/contest/1187/problem/B'],
-            ['Vasya Array',         'https://codeforces.com/contest/1187/problem/C'],
-            ['Remove Progression',  'https://codeforces.com/contest/1194/problem/A'],
-            ['Cross Problem',       'https://codeforces.com/contest/1194/problem/B'],
-            ['Wooden Ladder',       'https://codeforces.com/contest/1197/problem/A'],
-            ['Pillars',             'https://codeforces.com/contest/1197/problem/B'],
+            ['Zero to Hero',        'https://codeforces.com/contest/1175/problem/A', 1000],
+            ['Catch Overflow',      'https://codeforces.com/contest/1175/problem/B', 1600],
+            ['Electrification',     'https://codeforces.com/contest/1175/problem/C', 1600],
+
+            ['Stickers and Toys',   'https://codeforces.com/contest/1187/problem/A',  900],
+            ['Letters Shop',        'https://codeforces.com/contest/1187/problem/B', 1300],
+            ['Vasya Array',         'https://codeforces.com/contest/1187/problem/C', 1800],
+
+            ['Remove Progression',  'https://codeforces.com/contest/1194/problem/A',  800],
+            ['Cross Problem',       'https://codeforces.com/contest/1194/problem/B', 1300],
+
+            ['Wooden Ladder',       'https://codeforces.com/contest/1197/problem/A', 1000],
+            ['Pillars',             'https://codeforces.com/contest/1197/problem/B', 1000],
+            ['Array Spliting',      'https://codeforces.com/contest/1197/problem/C', 1000],
         ];
 
         function renderItems() {
@@ -130,6 +134,28 @@
         function randomPick() {
             const choice = Math.floor(Math.random() * items.length);
             updatePick(choice);
+        }
+
+        /**
+         * Pick a random item base on weight, "spinning wheel" algo in AI4R
+         */
+        function randomPickWeighted() {
+            weights = []
+            for (let i in items) {
+                var name, link, weight;
+                [name, link, weight] = items[i];
+                weights.push(weight);
+            }
+            
+            let idx = Math.floor(Math.random() * weights.length);
+            let maxWeight = Math.max(...weights);
+            beta = Math.random() * 2.0 * maxWeight;
+            while (beta > weights[idx]) {
+                beta -= weights[idx];
+                idx = (idx + 1) % weights.length;
+            }
+            
+            updatePick(idx);
         }
 
         renderItems();
