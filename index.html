@@ -106,12 +106,17 @@
             ['Remove Progression',  'https://codeforces.com/contest/1194/problem/A',  800],
             ['Cross Problem',       'https://codeforces.com/contest/1194/problem/B', 1300],
             // Edu 69
-            ['Wooden Ladder',       'https://codeforces.com/contest/1197/problem/A',  700],
-            ['Pillars',             'https://codeforces.com/contest/1197/problem/B',  900],
-            ['Array Spliting',      'https://codeforces.com/contest/1197/problem/C', 1500],
+            ['Wooden Ladder',       'https://codeforces.com/contest/1197/problem/A', 1000],
+            ['Pillars',             'https://codeforces.com/contest/1197/problem/B', 1000],
+            ['Array Spliting',      'https://codeforces.com/contest/1197/problem/C', 1400],
             // Edu 65
             ['Telephone Number',    'https://codeforces.com/contest/1167/problem/A',  700],
             ['Lost Number',         'https://codeforces.com/contest/1167/problem/B', 1400],
+            // Rd 575
+            ['Three Pile Candies',  'https://codeforces.com/contest/1196/problem/A',  700],
+            ['Old Summer Segments', 'https://codeforces.com/contest/1196/problem/B', 1200],
+            ['Robot Breakout',      'https://codeforces.com/contest/1196/problem/C', 1500],
+            ['RGB String',          'https://codeforces.com/contest/1196/problem/D', 1600],
         ];
 
         function renderItems() {
@@ -148,7 +153,7 @@
             for (let i in items) {
                 var name, link, weight;
                 [name, link, weight] = items[i];
-                weights.push(weight);
+                weights.push(weight * 2);
             }
 
             let idx = Math.floor(Math.random() * weights.length);
